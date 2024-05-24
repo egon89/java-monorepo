@@ -32,6 +32,9 @@ All these issues are fixed by the **Path interface**. So using the **File class 
 
 ## Path
 - A Path instance contains the information used to specify the location of a **file** or **directory**.
+- You can think of the Path as storing elements as a sequence, where:
+  - the highest element in the directory structure would be located at index 0
+  - the lowest element in the directory structure would be located at index [n-1]
 - What is a [URI](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/net/URI.html)?
   - represents a Uniform Resource Identifier (URI) reference
   - in string form has the syntax `[scheme:]scheme-specific-part[#fragment]`
