@@ -30,6 +30,19 @@
 
 All these issues are fixed by the **Path interface**. So using the **File class is not recommended anymore**
 
+## Path
+- A Path instance contains the information used to specify the location of a **file** or **directory**.
+- What is a [URI](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/net/URI.html)?
+  - represents a Uniform Resource Identifier (URI) reference
+  - in string form has the syntax `[scheme:]scheme-specific-part[#fragment]`
+    ``` 
+        mailto:java-net@www.example.com
+        news:comp.lang.java
+        urn:isbn:096139210x
+        http://example.com/languages/java/
+        file:///~/calendar 
+      ```
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
