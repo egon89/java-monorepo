@@ -46,6 +46,12 @@ All these issues are fixed by the **Path interface**. So using the **File class 
         file:///~/calendar 
       ```
 
+### Normalize
+- Returns a path that is this path with redundant name elements eliminated.
+  - In such file systems all occurrences of `.` are considered redundant.
+  - If a `..` is preceded by a `non-".."` name then both names are considered redundant
+  - [Documentation](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Path.html#normalize())
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
