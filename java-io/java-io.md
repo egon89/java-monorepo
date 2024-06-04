@@ -52,6 +52,15 @@ All these issues are fixed by the **Path interface**. So using the **File class 
   - If a `..` is preceded by a `non-".."` name then both names are considered redundant
   - [Documentation](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Path.html#normalize())
 
+### Relativize
+The Java Path method `relativize()` can create a new Path which represents the second Path relative to the first Path.
+
+For instance:
+- The first path is `/data`
+- The second path is `/data/subdata/subsubdata/myfile.txt`
+
+The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to the first path.
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
