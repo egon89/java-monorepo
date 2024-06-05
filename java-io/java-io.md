@@ -35,6 +35,8 @@ All these issues are fixed by the **Path interface**. So using the **File class 
 - You can think of the Path as storing elements as a sequence, where:
   - the highest element in the directory structure would be located at index 0
   - the lowest element in the directory structure would be located at index [n-1]
+  - the Path interface extends the [Iterable](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Iterable.html) interface, so we can **iterate** over the elements in the path
+  - the Path interface extends the [Comparable](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Comparable.html) interface, so we can compare Path objects by using `compareTo()`, which is useful for **sorting**
 - What is a [URI](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/net/URI.html)?
   - represents a Uniform Resource Identifier (URI) reference
   - in string form has the syntax `[scheme:]scheme-specific-part[#fragment]`
