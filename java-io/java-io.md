@@ -63,6 +63,14 @@ For instance:
 
 The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to the first path.
 
+## File System
+### Files Stores
+- A file system has one or more file stores to hold its files and directories
+- The file store represents the underlying storage device
+  - In UNIX operating systems, each mounted file system is represented by a file store
+  - In Microsoft Windows, each volume is represented by a file store
+
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
