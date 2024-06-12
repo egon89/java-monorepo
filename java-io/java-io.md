@@ -70,6 +70,11 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
   - In UNIX operating systems, each mounted file system is represented by a file store
   - In Microsoft Windows, each volume is represented by a file store
 
+## Manipulating files and directories
+- The `deleteIfExists` method: 
+  - It doesn't throw the `NoSuchFileException` when a file doesn't exist
+    - It's useful when we have multiple threads deleting files, and you don't want to throw an exception just because one thread did so first
+  - But, it throws the `DirectoryNotEmptyException` and `IOException` exceptions 
 
 ## I/O Stream
 - A stream is a sequence of data
