@@ -91,6 +91,34 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
         - Like an image or a video
         - All byte streams classes are descended from **InputStream** and **OutputStream**
 
+## Input Stream
+- It's an abstract class that represents an input stream of bytes
+- It's used **to read data from a source**, such as a file or network connection
+- To create an `InputStream`, we can use various subclasses, such as:
+  - `FileInputStream`
+  - `ByteArrayInputStream`
+  - `BufferedInputStream`
+
+```java
+// using FileInputStream
+InputStream input = new FileInputStream("file.txt");
+
+// using ByteArrayInputStream
+InputStream input = new ByteArrayInputStream("Hello World!".getBytes());
+
+// using BufferedInputStream
+InputStream input = new BufferedInputStream(new FileInputStream("file.txt"));
+
+// using InputStreamReader
+InputStream input = new FileInputStream("file.txt");
+InputStreamReader reader = new InputStreamReader(input);
+
+// using try-with-resources
+try (InputStream input = new FileInputStream("file.txt")) {
+  // Use the input stream
+}
+```
+
 ---
 **Links**
 - [Java I/O intro](https://dev.java/learn/java-io/intro/)
