@@ -74,7 +74,10 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
 - The `deleteIfExists` method: 
   - It doesn't throw the `NoSuchFileException` when a file doesn't exist
     - It's useful when we have multiple threads deleting files, and you don't want to throw an exception just because one thread did so first
-  - But, it throws the `DirectoryNotEmptyException` and `IOException` exceptions 
+  - But, it throws the `DirectoryNotEmptyException` and `IOException` exceptions
+
+- The `copy` method:
+  - Directories can be copied. However, **files inside the directory are not copied**. So the new directory is empty even when the original directory contains files
 
 ## I/O Stream
 - A stream is a sequence of data
