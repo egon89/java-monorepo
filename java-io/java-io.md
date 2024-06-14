@@ -79,6 +79,14 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
 - The `copy` method:
   - Directories can be copied. However, **files inside the directory are not copied**. So the new directory is empty even when the original directory contains files
 
+## Moving files and directories
+- Empty directories can be moved
+- On UNIX, moving a directory within the same level consists of renaming the directory (even when it contains files)
+
+## Atomic operations
+- It's an operation that cannot be interrupted or "partially" performed. Either the entire operation is performed or the operation fails
+- Several [Files](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html) methods can perform operations atomically
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
