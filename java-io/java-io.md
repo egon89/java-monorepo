@@ -87,6 +87,19 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
 - It's an operation that cannot be interrupted or "partially" performed. Either the entire operation is performed or the operation fails
 - Several [Files](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html) methods can perform operations atomically
 
+## File and File Store Attributes
+- [BasicFileAttributeView](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/BasicFileAttributeView.html) interface
+  - A file attribute view that provides a view of a basic set of file attributes common to many file systems
+  - Contains the _readAttributes()_ method that reads the basic file attributes as a bulk operation returning an `BasicFileAttributes`
+- [BasicFileAttributes](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/BasicFileAttributes.html) class
+  - Basic attributes associated with a file in a file system 
+  - Basic file attributes are attributes that are common to many file systems
+- [FileOwnerAttributeView](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/FileOwnerAttributeView.html) interface
+  - It supports reading or updating the owner of a file
+- [UserDefinedFileAttributeView](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/UserDefinedFileAttributeView.html) interface
+  - It provides a view of a file's user-defined attributes, sometimes known as extended attributes (metadata defined by user)
+    - You can use this view to store the MIME type of file
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
