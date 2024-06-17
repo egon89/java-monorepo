@@ -88,6 +88,10 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
 - Several [Files](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html) methods can perform operations atomically
 
 ## File and File Store Attributes
+- The [Files](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html) class includes methods that can be used to obtain a single attribute of a file
+- We can use the `Files.readAttributes()` to get file's attributes in one bulk operation 
+
+Different file systems have different notions about which attributes should be tracked. For this reason, related file attributes are grouped together into views:
 - [BasicFileAttributeView](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/BasicFileAttributeView.html) interface
   - A file attribute view that provides a view of a basic set of file attributes common to many file systems
   - Contains the _readAttributes()_ method that reads the basic file attributes as a bulk operation returning an `BasicFileAttributes`
@@ -99,6 +103,13 @@ The second path can be expressed as `/subdata/subsubdata/myfile.txt` relative to
 - [UserDefinedFileAttributeView](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/UserDefinedFileAttributeView.html) interface
   - It provides a view of a file's user-defined attributes, sometimes known as extended attributes (metadata defined by user)
     - You can use this view to store the MIME type of file
+
+### BasicFileAttributes
+- The [_fileKey()_](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/attribute/BasicFileAttributes.html#fileKey()) method returns an object that **uniquely identifies the given file**, or null if a file key is not available
+```java
+BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class);
+System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
+```
 
 ## I/O Stream
 - A stream is a sequence of data
