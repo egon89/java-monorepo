@@ -111,6 +111,15 @@ BasicFileAttributes attr = Files.readAttributes(path, BasicFileAttributes.class)
 System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
 ```
 
+### POSIX File Permissions
+- POSIX (Portable Operating System Interface for Unix) is a set of standards designed to ensure interoperability among different flavors of UNIX
+- Besides file owner and group owner, POSIX supports file permissions like:
+  - read, write and execute permissions 
+    - for the 
+      - file owner,
+      - members of the same group
+      - everyone else
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
