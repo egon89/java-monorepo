@@ -120,6 +120,10 @@ System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
       - members of the same group
       - everyone else
 
+### Setting a file or group owner
+- We can use `cat /etc/passwd` to list users on Linux
+- We can use `cat /etc/group` to list groups on Linux
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
