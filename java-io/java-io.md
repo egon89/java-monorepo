@@ -124,6 +124,17 @@ System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
 - We can use `cat /etc/passwd` to list users on Linux
 - We can use `cat /etc/group` to list groups on Linux
 
+## Listing
+### Listing content of a directory
+- [DirectoryStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/DirectoryStream.html)
+  -  The Path objects returned by the iterator (DirectoryStream) are the names of the entries **resolved** against the directory
+      - if we are listing the contents of the `/tmp` directory, the entries are returned with the form `/tmp/a`, `/tmp/b` and so on
+  - This method returns the entire content of a directory
+    - files
+    - links
+    - subdirectories (non-recursively)
+    - hidden files
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
