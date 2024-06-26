@@ -134,6 +134,7 @@ System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
     - links
     - subdirectories (non-recursively)
     - hidden files
+  - We can provide a [glob filter]((https://dev.java/learn/java-io/file-system/listing/#glob)) to only get files and subdirectories that follow a pattern
 
 ## I/O Stream
 - A stream is a sequence of data
