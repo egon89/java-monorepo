@@ -146,6 +146,8 @@ You can do so with the [FileVisitor](https://docs.oracle.com/en/java/javase/22/d
   - `visitFile()`
   - `visitFileFailed()`
 
+> [Considerations](https://dev.java/learn/java-io/file-system/walking-tree/#considerations) when creating a FileVisitor
+
 If we don't need to implement all four of the **FileVisitor** methods, we can extend the [**SimpleFileVisitor**](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/SimpleFileVisitor.html) class, an adapter class, and override only the desired methods.
 
 ## I/O Stream
