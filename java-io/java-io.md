@@ -136,6 +136,18 @@ System.out.println(attr.fileKey());  // (dev=10305,ino=11205364)
     - hidden files
   - We can provide a [glob filter]((https://dev.java/learn/java-io/file-system/listing/#glob)) to only get files and subdirectories that follow a pattern
 
+## Walking the File Tree
+Do you need to create an application that will recursively visit all the files in a file tree?
+Perhaps you need to delete every _.class_ file in a tree, or find every file that has not been accessed in the last year.
+You can do so with the [FileVisitor](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/FileVisitor.html) interface.
+- FileVisitor interface methods
+  - `preVisitDirectory()`
+  - `postVisitDirectory()`
+  - `visitFile()`
+  - `visitFileFailed()`
+
+If we don't need to implement all four of the **FileVisitor** methods, we can extend the [**SimpleFileVisitor**](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/SimpleFileVisitor.html) class, an adapter class, and override only the desired methods.
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
