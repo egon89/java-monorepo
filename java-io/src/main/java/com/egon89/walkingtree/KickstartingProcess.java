@@ -29,7 +29,7 @@ public class KickstartingProcess {
     */
   }
 
-  private static void init() throws IOException {
+  public static void init() throws IOException {
     List.of(
             Path.of("/tmp/f1"),
             Path.of("/tmp/f1/f11"),
