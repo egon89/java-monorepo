@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -13,12 +14,71 @@ import java.util.stream.Stream;
 public class Copy {
 
   public static void main(String[] args) throws IOException {
-    KickstartingProcess.init();
+    init();
     Path source = Path.of("/tmp/f1");
     Path destination = Path.of("/tmp/f1-copy");
     Replicator replicator = new Replicator(source, destination);
     Files.walkFileTree(source, replicator);
     replicator.done();
+    /*
+      Copy directory: /tmp/f1
+      Copy directory: /tmp/f1/f12
+      Copy directory: /tmp/f1/f12/f121
+      Copying file: /tmp/f1/f12/f121/e.html
+      Copying file: /tmp/f1/f12/d.txt
+      Copy directory: /tmp/f1/f13
+      Copying file: /tmp/f1/f13/.env
+      Copy directory: /tmp/f1/f11
+      Copying file: /tmp/f1/f11/c.log
+      Copying file: /tmp/f1/b.html
+      Copying file: /tmp/f1/a.txt
+      Number of files copied: 2
+    */
+  }
+
+  public static void init() throws IOException {
+    List.of(
+            Path.of("/tmp/f1"),
+            Path.of("/tmp/f1/f11"),
+            Path.of("/tmp/f1/f12/f121"),
+            Path.of("/tmp/f1/f13"))
+        .forEach(path -> {
+          try {
+            Files.createDirectories(path);
+          } catch (IOException e) {
+            System.err.format("error to create %s by createDirectory\n", path);
+          }
+        });
+
+    Path file = Path.of("/tmp/f1/a.txt");
+    if (Files.notExists(file)) {
+      Files.createFile(file);
+    }
+
+    Path file2 = Path.of("/tmp/f1/b.html");
+    if (Files.notExists(file2)) {
+      Files.createFile(file2);
+    }
+
+    Path file3 = Path.of("/tmp/f1/f11/c.log");
+    if (Files.notExists(file3)) {
+      Files.createFile(file3);
+    }
+
+    Path file4 = Path.of("/tmp/f1/f12/d.txt");
+    if (Files.notExists(file4)) {
+      Files.createFile(file4);
+    }
+
+    Path file5 = Path.of("/tmp/f1/f12/f121/e.html");
+    if (Files.notExists(file5)) {
+      Files.createFile(file5);
+    }
+
+    Path file6 = Path.of("/tmp/f1/f13/.env");
+    if (Files.notExists(file6)) {
+      Files.createFile(file6);
+    }
   }
 
   public static class Replicator extends SimpleFileVisitor<Path> {
@@ -92,7 +152,7 @@ public class Copy {
 
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException exc) {
-      System.err.printf("Unable to copy %s%n", file);
+      System.err.printf("Unable to copy: %s%n", file);
 
       return FileVisitResult.CONTINUE;
     }
