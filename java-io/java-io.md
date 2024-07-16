@@ -150,6 +150,18 @@ You can do so with the [FileVisitor](https://docs.oracle.com/en/java/javase/22/d
 
 If we don't need to implement all four of the **FileVisitor** methods, we can extend the [**SimpleFileVisitor**](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/SimpleFileVisitor.html) class, an adapter class, and override only the desired methods.
 
+## Watching a directory changes
+- To implement a file change notification, we can use the notification API [WatchService](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/WatchService.html)
+- We can register a directory (or directories) and tell which types of events we are interested in
+  - file creation
+  - file deletion
+  - file modification
+- Each register has a thread (or a pool of threads) dedicated to watching for any events it has registered for
+  - any object that implements the [Watchable](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Watchable.html) interface can be registered
+  - the [Path](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Path.html) implements `Watchable`, so each directory to be monitored can be registered as a `Path` object
+
+> We can use the Watch Service API to watches a directory, perhaps waiting for .jar files to drop, in order to deploy them
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
