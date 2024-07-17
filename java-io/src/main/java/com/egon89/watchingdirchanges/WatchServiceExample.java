@@ -2,7 +2,6 @@ package com.egon89.watchingdirchanges;
 
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.List;
 
 /**
  * <a href="https://dev.java/learn/java-io/file-system/watching-dir-changes/#creating-service">dev.java</a>
@@ -18,10 +17,23 @@ public class WatchServiceExample {
           StandardWatchEventKinds.ENTRY_DELETE,
           StandardWatchEventKinds.ENTRY_MODIFY
       );
+
+      for (;;) {
+        for (WatchEvent<?> event: key.pollEvents()) {
+          WatchEvent.Kind<?> kind = event.kind();
+          if (kind == StandardWatchEventKinds.OVERFLOW) continue;
+
+          WatchEvent<Path> ev = (WatchEvent<Path>)event;
+          Path filename = ev.context();
+
+          System.out.printf("event: %s: %s%n", kind.name(), filename);
+        }
+        boolean valid = key.reset();
+        if (!valid) break;
+      }
     } catch (IOException exception) {
       System.err.println(exception.getMessage());
     }
-
   }
 
   public static void init() {
