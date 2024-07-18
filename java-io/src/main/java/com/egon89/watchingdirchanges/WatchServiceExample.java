@@ -7,6 +7,7 @@ import java.nio.file.*;
  * <a href="https://dev.java/learn/java-io/file-system/watching-dir-changes/#creating-service">dev.java</a>
  */
 public class WatchServiceExample {
+  @SuppressWarnings("unchecked")
   public static void main(String[] args) throws IOException {
     init();
     Path dir = Path.of("/tmp/f1");
@@ -23,10 +24,17 @@ public class WatchServiceExample {
           WatchEvent.Kind<?> kind = event.kind();
           if (kind == StandardWatchEventKinds.OVERFLOW) continue;
 
-          WatchEvent<Path> ev = (WatchEvent<Path>)event;
+          WatchEvent<Path> ev = (WatchEvent<Path>) event;
           Path filename = ev.context();
-
-          System.out.printf("event: %s: %s%n", kind.name(), filename);
+          System.out.printf("file: %s: %s%n", filename, kind.name());
+          try {
+            Path child = dir.resolve(filename);
+            if (!Files.probeContentType(child).equals("text/plain")) {
+              System.out.printf("The file %s (%s) is not a plain text file%n", filename, child);
+            }
+          } catch (IOException exception) {
+            System.err.println(exception.getMessage());
+          }
         }
         boolean valid = key.reset();
         if (!valid) break;

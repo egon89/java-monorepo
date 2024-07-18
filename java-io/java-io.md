@@ -162,6 +162,8 @@ If we don't need to implement all four of the **FileVisitor** methods, we can ex
 
 > We can use the Watch Service API to watches a directory, perhaps waiting for .jar files to drop, in order to deploy them
 
+<img src="https://raw.githubusercontent.com/egon89/resources/main/gifs/watchservice.gif" width="80%" />
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
