@@ -164,6 +164,16 @@ If we don't need to implement all four of the **FileVisitor** methods, we can ex
 
 <img src="https://raw.githubusercontent.com/egon89/resources/main/gifs/watchservice.gif" width="80%" />
 
+# File Operations Basics
+- Small files: we can load in memory
+- Large files: we access through buffers
+
+## Commonly used methods for small files
+- We can use the [readAllBytes](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#readAllBytes(java.nio.file.Path)) or [readAllLines](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#readAllLines(java.nio.file.Path,java.nio.charset.Charset)) methods to read an entire file content
+- We can use the [write](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#write(java.nio.file.Path,byte%5B%5D,java.nio.file.OpenOption...)) method to writes bytes to a file
+
+---
+
 ## I/O Stream
 - A stream is a sequence of data
     - A program uses an input stream to read data from a source, one item at a time and an output stream to write data to a destination, one item at time
