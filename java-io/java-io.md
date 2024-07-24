@@ -172,6 +172,11 @@ If we don't need to implement all four of the **FileVisitor** methods, we can ex
 - We can use the [readAllBytes](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#readAllBytes(java.nio.file.Path)) or [readAllLines](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#readAllLines(java.nio.file.Path,java.nio.charset.Charset)) methods to read an entire file content
 - We can use the [write](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#write(java.nio.file.Path,byte%5B%5D,java.nio.file.OpenOption...)) method to writes bytes to a file
 
+## Reading a Text File by Using Buffered Stream I/O
+- Input and output done with stream classes **automatically translates** to and from the local character set (UTF-8/ASCII)
+- The [newBufferedReader](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#newBufferedReader(java.nio.file.Path,java.nio.charset.Charset)) method opens a file for reading, returning a `BufferedReader` that can be used to read text from a file in an efficient manner
+  - The `BufferedReader` class gives you a method to read the content of your text file line by line
+
 ---
 
 ## I/O Stream
@@ -213,6 +218,10 @@ try (InputStream input = new FileInputStream("file.txt")) {
   // Use the input stream
 }
 ```
+
+## [BufferedReader](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/BufferedReader.html)
+- Reads text from a character-input stream, buffering characters to provide for the efficient reading of characters, arrays, and lines
+
 
 ---
 **Links**
