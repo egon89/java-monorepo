@@ -222,6 +222,13 @@ try (InputStream input = new FileInputStream("file.txt")) {
 ## [BufferedReader](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/BufferedReader.html)
 - Reads text from a character-input stream, buffering characters to provide for the efficient reading of characters, arrays, and lines
 
+## [OutputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/OutputStream.html)
+- It's a superclass of all classes representing an output stream
+- An output stream accepts output bytes and sends them to some sink
+
+### [Files.newOutputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#newOutputStream(java.nio.file.Path,java.nio.file.OpenOption...))
+- Opens or create a file, returning an output stream that may be used to write bytes to the file
+
 
 ---
 **Links**
