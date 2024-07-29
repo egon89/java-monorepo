@@ -243,6 +243,13 @@ Scenario: Writing a 32 KB file using 16 KB for buffer
 
 > We call the `write(byte[] b)` only one time. The `BufferedOutputStream` internally handles the process of breaking the data into chunks that fit the buffer size and flushing them as needed
 
+## [ByteArrayOutputStream](https://docs.oracle.com/javase/8/docs/api/java/io/ByteArrayOutputStream.html)
+- It extends `OutputStream` and provides a way to write data to a byte array
+- The buffer automatically grows as data is written to it
+- When to use it:
+  - Collection data in memory: when you need to write data to a buffer that can grow as needed (we don't know how much data will be written)
+  - Data manipulation: if we need to manipulate or inspect data (keeping data in memory) before writing it to its final destination 
+
 ---
 **Links**
 - [Java I/O intro](https://dev.java/learn/java-io/intro/)
