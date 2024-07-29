@@ -229,6 +229,19 @@ try (InputStream input = new FileInputStream("file.txt")) {
 ### [Files.newOutputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/nio/file/Files.html#newOutputStream(java.nio.file.Path,java.nio.file.OpenOption...))
 - Opens or create a file, returning an output stream that may be used to write bytes to the file
 
+## [BufferedOutputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/BufferedOutputStream.html)
+- It provides buffering for output streams (wrapping an existing OutputStream) reducing the number of write operations
+- It achieves this by maintaining an internal buffer and only writing data to the underlying stream when the buffer is full or when the stream is explicitly flushed
+- The default buffer size is 8192 bytes (8 KB)
+
+Scenario: Writing a 32 KB file using 16 KB for buffer
+- The `write(byte[] b)` will receive the entire 32 KB of data
+- The `BufferedOutputStream` writes the first 16 KB (first write call)
+- The buffer is full, it flushes the 16 KB buffer to the underlying `FileOutputStream`, which writes it to the file
+- The remaining 16 KB of data is written to the buffer
+- Once again, when the buffer is full, it is flushed to the underlying `FileOutputStream` (second write call)
+
+> We call the `write(byte[] b)` only one time. The `BufferedOutputStream` internally handles the process of breaking the data into chunks that fit the buffer size and flushing them as needed
 
 ---
 **Links**
