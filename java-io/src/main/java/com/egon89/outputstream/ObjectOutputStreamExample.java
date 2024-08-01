@@ -8,6 +8,7 @@ public class ObjectOutputStreamExample {
 
   public static void main(String[] args) {
     serialize();
+    deserialize();
   }
 
   private static void serialize() {
@@ -22,20 +23,26 @@ public class ObjectOutputStreamExample {
     }
   }
 
-  private static class Person implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-    private final String name;
-    private final int age;
-
-    public Person(String name, int age) {
-      this.name = name;
-      this.age = age;
-    }
-
-    @Override
-    public String toString() {
-      return "Person{name='%s', age=%d}".formatted(name, age);
+  private static void deserialize() {
+    try(FileInputStream fileInputStream = new FileInputStream(FILENAME);
+      ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+      Person person = (Person) objectInputStream.readObject();
+      System.out.println("Deserialized person...");
+      System.out.println(person);
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+    } catch (ClassNotFoundException e) {
+      System.err.format("Person class not found: %s%n", e.getMessage());
     }
   }
+
+  private record Person(String name, int age) implements Serializable {
+      @Serial
+      private static final long serialVersionUID = 1L;
+
+    @Override
+      public String toString() {
+        return "Person{name='%s', age=%d}".formatted(name, age);
+      }
+    }
 }
