@@ -259,6 +259,18 @@ Scenario: Writing a 32 KB file using 16 KB for buffer
   - [OutputStreamWriter](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/OutputStreamWriter.html) that can write characters to an `OutputStream`
     - `OutputStreamWriter` extends the `Writer` and it needs an `OutputStream` object to be built
 
+## Handling compressed binary streams
+- We can use the [GZIPInputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/zip/GZIPInputStream.html) and [GZIPOutputStream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/zip/GZIPOutputStream.html) to read and write **gzip** files (they use the decorator pattern)
+  - Gzip is an implementation of the _deflate algorithm_
+
+```bash
+# compressing a file (gzip)
+gzip -k example.txt
+
+# decompressing a file
+gzip -d example.txt.gz
+```
+
 ---
 **Links**
 - [Java I/O intro](https://dev.java/learn/java-io/intro/)
