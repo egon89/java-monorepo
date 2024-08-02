@@ -250,6 +250,15 @@ Scenario: Writing a 32 KB file using 16 KB for buffer
   - Collection data in memory: when you need to write data to a buffer that can grow as needed (we don't know how much data will be written)
   - Data manipulation: if we need to manipulate or inspect data (keeping data in memory) before writing it to its final destination 
 
+## Writing and reading characters to binary streams
+- Java I/O API is divided into two categories, one to handle characters and the other to handle bytes
+- Writing characters to binary files is something that is widely used in applications
+- The Java I/O API gives two classes for that:
+  - [InputStreamReader](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/InputStreamReader.html) that can read characters from an `InputStream`
+    - `InputStreamReader` is a decoration of the `Reader` class, built on an `InputStream`
+  - [OutputStreamWriter](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/io/OutputStreamWriter.html) that can write characters to an `OutputStream`
+    - `OutputStreamWriter` extends the `Writer` and it needs an `OutputStream` object to be built
+
 ---
 **Links**
 - [Java I/O intro](https://dev.java/learn/java-io/intro/)
