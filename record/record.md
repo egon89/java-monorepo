@@ -52,3 +52,15 @@ public record Range(int start, int end) {
     }
 }
 ```
+
+## Canonical constructor
+- The constructor needs the parameters declaration
+- Values must be assigned to all fields
+```java
+public record Range(int start, int end) {
+    public Range(int start, int end) {
+      this.start = start;
+      this.end = end;
+    }
+}
+```
