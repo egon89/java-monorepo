@@ -42,3 +42,13 @@ public record Person(String name, int age) {
     }
 }
 ```
+
+## Compact constructor
+- The constructor doesn't need the parameters declaration
+```java
+public record Range(int start, int end) {
+    public Range {
+      // ... some validation here
+    }
+}
+```
