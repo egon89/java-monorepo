@@ -15,6 +15,7 @@
         <module>java-io</module>
         <module>record</module>
         <module>reflection</module>
+        <module>pattern-matching</module>
     </modules>
 
     <properties>
