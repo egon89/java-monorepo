@@ -16,6 +16,7 @@
         <module>record</module>
         <module>reflection</module>
         <module>pattern-matching</module>
+        <module>refactor-to-functional-style</module>
     </modules>
 
     <properties>
