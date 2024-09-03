@@ -17,6 +17,7 @@
         <module>reflection</module>
         <module>pattern-matching</module>
         <module>refactor-to-functional-style</module>
+        <module>stream-api</module>
     </modules>
 
     <properties>
