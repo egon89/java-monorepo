@@ -23,3 +23,7 @@ Because they are handling numbers, they have some terminal operations that don't
 - `min()`, `max()`: to compute the minimum or the maximum number of a stream
 - `average()`: to compute the average value of the numbers
 - `summaryStatistics()`: this call produces a special object that carries several statistics, all computed on one pass over your data. These statistics are the number of elements processed by that stream, the min, the max, the sum and the average.
+
+## FlatMap
+- This operator opens one-to-many relations between objects and create streams on these relations
+- It takes a special function as an argument that returns a [Stream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/stream/Stream.html) object
