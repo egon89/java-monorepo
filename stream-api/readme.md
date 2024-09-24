@@ -27,3 +27,32 @@ Because they are handling numbers, they have some terminal operations that don't
 ## FlatMap
 - This operator opens one-to-many relations between objects and create streams on these relations
 - It takes a special function as an argument that returns a [Stream](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/stream/Stream.html) object
+
+### MapMulti
+- the mapMulti is better than use a filter because:
+  - we will need to do `Integer.parseInt` twice, the first in predicate and the second in the map
+  - it's never a good idea to return values from a catch block
+  ```java
+    Predicate<String> isANumber = s -> {
+      try {
+          int i = Integer.parseInt(s);
+          return true;
+      } catch (NumberFormatException e) {
+          return false;
+      }
+    };
+  ``` 
+- the mapMulti is better than the flatMap because:
+  - if the `Integer.parseInt` goes wrong, we will need to return a `Stream.empty()`
+  ```java
+  Function<String, Stream<Integer>> flatParser = s -> {
+      try {
+          return Stream.of(Integer.parseInt(s));
+      } catch (NumberFormatException e) {
+      }
+      return Stream.empty();
+  };
+  ```
+- the mapMulti try to parse to int
+  - if successful, a stream is returned
+  - if error, the consumer is not called (no stream is created)

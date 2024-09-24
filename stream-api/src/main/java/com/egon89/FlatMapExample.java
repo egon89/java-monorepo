@@ -46,4 +46,25 @@ public class FlatMapExample {
 
   private record City(String name, int population) {}
   private record State(String name, List<City> cities) {}
+
+  /**
+   * <a href="https://dev.java/learn/api/streams/intermediate-operation/#flatmap-and-mapmulti">dev.java</a>
+   */
+  public static class MapMultiExample {
+    public static void main(String[] args) {
+      List<String> strings = List.of("1", " ", "2", "3 ", "", "3");
+      List<Integer> ints = strings.stream()
+          .<Integer>mapMulti((s, consumer) -> {
+            // in case the mapping cannot be done
+            // the consumer is not called, and no element will be added
+            try {
+              consumer.accept(Integer.parseInt(s));
+            } catch (NumberFormatException e) {
+              System.err.println("Error to parse string to integer");
+            }
+          })
+          .toList();
+      System.out.println(ints);
+    }
+  }
 }
