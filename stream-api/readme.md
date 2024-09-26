@@ -56,3 +56,10 @@ Because they are handling numbers, they have some terminal operations that don't
 - the mapMulti try to parse to int
   - if successful, a stream is returned
   - if error, the consumer is not called (no stream is created)
+
+## Distinct
+- a stream is supposed to be an empty object that does not store any data, but there are exceptions, and the distinct is one of this.
+- to spot duplicates, the distinct() method needs to store the elements of your stream. When it processes an element, it first checks if that element has already been seen or not.
+- the distinct() method:
+  - uses the hashCode() and equals()
+  - can be used on unbound (infinite) streams
