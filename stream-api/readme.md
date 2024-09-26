@@ -63,3 +63,10 @@ Because they are handling numbers, they have some terminal operations that don't
 - the distinct() method:
   - uses the hashCode() and equals()
   - can be used on unbound (infinite) streams
+
+## Sorted
+- a stream is supposed to be an empty object that does not store any data, but there are exceptions, and the sorted is one of this
+- it needs to store all of your elements and then to sort them in an internal buffer before sending them to the next step of your processing pipeline
+- it cannot be used on unbound (infinite) streams
+- if we don't provide a Comparator, the Stream API assumes that the elements are comparable (Comparable<T>)
+  - if the element doesn't implement Comparable, a ClassCastException will be thrown
