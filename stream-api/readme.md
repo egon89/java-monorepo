@@ -70,3 +70,6 @@ Because they are handling numbers, they have some terminal operations that don't
 - it cannot be used on unbound (infinite) streams
 - if we don't provide a Comparator, the Stream API assumes that the elements are comparable (Comparable<T>)
   - if the element doesn't implement Comparable, a ClassCastException will be thrown
+
+## Binary Operator
+- Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
