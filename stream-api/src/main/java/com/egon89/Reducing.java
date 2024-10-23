@@ -10,6 +10,7 @@ public class Reducing {
   public static void main(String[] args) {
     classicForLoop();
     classicForLoopWithBinaryOperator();
+    parallelSimulation();
   }
 
   private static void classicForLoop() {
@@ -37,5 +38,26 @@ public class Reducing {
       max = maxOperator.apply(max, ints.get(i));
     }
     System.out.printf("max with binary operator: %d%n", max); // 6
+  }
+
+  // The Stream API splits the source data to process each chunk
+  // finally, the chunks are merged to get the final result
+  private static void parallelSimulation() {
+    List<Integer> ints = List.of(3, 6, 2, 1);
+    BinaryOperator<Integer> sumOperator = Integer::sum;
+
+    int result1 = reduce(ints.subList(0, 2), sumOperator);
+    int result2 = reduce(ints.subList(2, 4), sumOperator);
+
+    int result = sumOperator.apply(result1, result2);
+    System.out.printf("Parallel simulation: %d%n", result); // 12
+  }
+
+  private static int reduce(List<Integer> ints, BinaryOperator<Integer> sum) {
+    int result = ints.get(0);
+    for (int index = 1; index < ints.size(); index++) {
+      result = sum.apply(result, ints.get(index));
+    }
+    return result;
   }
 }
