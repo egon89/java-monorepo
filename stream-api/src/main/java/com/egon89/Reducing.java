@@ -11,6 +11,7 @@ public class Reducing {
     classicForLoop();
     classicForLoopWithBinaryOperator();
     parallelSimulation();
+    reducingWithAnIdentityElement();
   }
 
   private static void classicForLoop() {
@@ -59,5 +60,22 @@ public class Reducing {
       result = sum.apply(result, ints.get(index));
     }
     return result;
+  }
+
+  private static void reducingWithAnIdentityElement() {
+    List<Integer> ints = List.of(3, 6, 2, 1);
+    BinaryOperator<Integer> sum = Integer::sum;
+    int identity = 0;
+
+    int result = identity;
+    for (int i: ints) {
+      result = sum.apply(result, i);
+    }
+
+    System.out.printf("reducing with an identity element: %d%n", result);
+
+    // stream format
+    int result2 = ints.stream().reduce(identity, Integer::sum);
+    System.out.printf("reducing with an identity element: %d%n", result2);
   }
 }
