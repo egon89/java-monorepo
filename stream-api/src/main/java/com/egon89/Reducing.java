@@ -1,7 +1,9 @@
 package com.egon89;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
 
 /**
  * <a href="https://dev.java/learn/api/streams/reducing/">dev.java</a>
@@ -12,6 +14,7 @@ public class Reducing {
     classicForLoopWithBinaryOperator();
     parallelSimulation();
     reducingWithAnIdentityElement();
+    reducingWithNoIdentityElement();
   }
 
   private static void classicForLoop() {
@@ -77,5 +80,14 @@ public class Reducing {
     // stream format
     int result2 = ints.stream().reduce(identity, Integer::sum);
     System.out.printf("reducing with an identity element: %d%n", result2);
+  }
+
+  private static void reducingWithNoIdentityElement() {
+    // the return is an optional when there is no identity element
+    Stream<Integer> ints = Stream.of(2, 8, 1, 5, 3);
+    Optional<Integer> optionalMax = ints.reduce((x, y) -> x > y ? x : y);
+
+    System.out.printf("Max: %d%n", optionalMax.orElse(0)); // 8
+
   }
 }
