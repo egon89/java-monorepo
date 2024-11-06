@@ -2,6 +2,7 @@ package com.egon89;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
@@ -15,6 +16,7 @@ public class Reducing {
     parallelSimulation();
     reducingWithAnIdentityElement();
     reducingWithNoIdentityElement();
+    fusingReductionAndMapping();
   }
 
   private static void classicForLoop() {
@@ -89,5 +91,14 @@ public class Reducing {
 
     System.out.printf("Max: %d%n", optionalMax.orElse(0)); // 8
 
+  }
+
+  private static void fusingReductionAndMapping() {
+    Stream<String> strings = Stream.of("one", "two", "three", "four");
+    BinaryOperator<Integer> combiner = Integer::sum; // (length1, length2) -> length1 + length2
+    BiFunction<Integer, String, Integer> accumulator = (partialReduction, element) -> partialReduction + element.length();
+
+    int result = strings.reduce(0, accumulator, combiner);
+    System.out.printf("sum length: %d%n", result); // 15
   }
 }
