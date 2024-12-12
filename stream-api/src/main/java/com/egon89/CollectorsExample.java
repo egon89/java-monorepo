@@ -2,6 +2,7 @@ package com.egon89;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,6 +15,8 @@ public class CollectorsExample {
     collectorsFactory();
     countingWithACollector();
     collectingStringOfCharacters();
+    partitioningElementsWithAPredicate();
+    groupElementsInAMap();
   }
 
   private static void collectorsFactory() {
@@ -70,5 +73,52 @@ public class CollectorsExample {
         .map(Object::toString)
         .collect(Collectors.joining(", ", "{", "}"));
     System.out.println("value3: " + value3); // value3: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+  }
+
+  private static void partitioningElementsWithAPredicate() {
+    System.out.println("> partitioningElementsWithAPredicate");
+    var strings =
+        List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve");
+
+    Map<Boolean, List<String>> map =
+        strings.stream()
+            .collect(Collectors.partitioningBy(s -> s.length() > 4));
+
+    map.forEach((key, values) -> System.out.printf("key %b :: %s%n", key, values));
+    // key false :: [one, two, four, five, six, nine, ten]
+    // key true :: [three, seven, eight, eleven, twelve]
+  }
+
+  private static void groupElementsInAMap() {
+    System.out.println("> groupElementsInAMap");
+    var strings =
+        List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve");
+
+    Map<Integer, List<String>> map =
+        strings.stream()
+            .collect(Collectors.groupingBy(String::length));
+
+    map.forEach((key, values) -> System.out.printf("key %d :: %s%n", key, values));
+
+    // counting the values with downstream collector
+    System.out.println(">> counter");
+    Map<Integer, Long> mapCounter =
+        strings.stream()
+            .collect(Collectors.groupingBy(
+                String::length, Collectors.counting()));
+
+    mapCounter.forEach(
+        (key, counter) -> System.out.printf("key %d :: %d%n", key, counter));
+
+    // joining the values with downstream
+    System.out.println(">> joining values");
+    Map<Integer, String> mapJoining =
+        strings.stream()
+            .collect(Collectors.groupingBy(
+                String::length, Collectors.joining(", ")));
+
+    mapJoining.forEach((key, value) -> System.out.printf("key %d :: %s%n", key, value));
   }
 }
