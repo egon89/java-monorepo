@@ -17,6 +17,7 @@ public class CollectorsExample {
     collectingStringOfCharacters();
     partitioningElementsWithAPredicate();
     groupElementsInAMap();
+    extractingNonAmbiguousMax();
   }
 
   private static void collectorsFactory() {
@@ -120,5 +121,33 @@ public class CollectorsExample {
                 String::length, Collectors.joining(", ")));
 
     mapJoining.forEach((key, value) -> System.out.printf("key %d :: %s%n", key, value));
+  }
+
+  private static void extractingNonAmbiguousMax() {
+    var strings =
+        List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve");
+
+    Map<Integer, Long> histogram =
+        strings.stream()
+            .collect(
+                Collectors.groupingBy(
+                    String::length,
+                    Collectors.counting()));
+
+    histogram.forEach((key, value) -> System.out.printf("%d :: %d%n", key, value));
+    /*
+      3 :: 4
+      4 :: 3
+      5 :: 3
+      6 :: 2
+    */
+
+    Map.Entry<Integer, Long> maxValue =
+        histogram.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .orElseThrow();
+
+    System.out.println("maxValue: " + maxValue); // maxValue: 3=4
   }
 }
