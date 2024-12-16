@@ -1,9 +1,6 @@
 package com.egon89;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,6 +15,7 @@ public class CollectorsExample {
     partitioningElementsWithAPredicate();
     groupElementsInAMap();
     extractingNonAmbiguousMax();
+    extractingNonAmbiguousMaxWithRecord();
   }
 
   private static void collectorsFactory() {
@@ -124,6 +122,7 @@ public class CollectorsExample {
   }
 
   private static void extractingNonAmbiguousMax() {
+    System.out.println("> extractingNonAmbiguousMax");
     var strings =
         List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve");
@@ -149,5 +148,38 @@ public class CollectorsExample {
             .orElseThrow();
 
     System.out.println("maxValue: " + maxValue); // maxValue: 3=4
+  }
+
+  private static void extractingNonAmbiguousMaxWithRecord() {
+    System.out.println("> extractingNonAmbiguousMaxWithRecord");
+    record NumberOfLength(int length, long number) {
+      static NumberOfLength fromEntry(Map.Entry<Integer, Long> entry) {
+        return new NumberOfLength(entry.getKey(), entry.getValue());
+      }
+
+      static Comparator<NumberOfLength> comparingByLength() {
+        return Comparator.comparing(NumberOfLength::number);
+      }
+    }
+
+    var strings =
+        List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve");
+
+    Map<Integer, Long> histogram =
+        strings.stream()
+            .collect(
+                Collectors.groupingBy(
+                    String::length,
+                    Collectors.counting()));
+
+    NumberOfLength maxNumberOfLength =
+        histogram.entrySet().stream()
+            .map(NumberOfLength::fromEntry)
+            .max(NumberOfLength.comparingByLength())
+            .orElseThrow();
+
+    System.out.println("maxNumberOfLength: " + maxNumberOfLength);
+    // maxNumberOfLength: NumberOfLength[length=3, number=4]
   }
 }
