@@ -1,0 +1,38 @@
+package com.egon89.usecase;
+
+import com.egon89.model.GitHubUser;
+import com.egon89.port.FindRepositoriesByUserIdPort;
+import com.egon89.port.FindUserByIdPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+
+public class FindGitHubUserVirtualThreadRawPreviousErrorUseCase implements FindGitHubUserUseCase {
+  private static final Logger LOGGER = LoggerFactory.getLogger(FindGitHubUserVirtualThreadRawPreviousErrorUseCase.class);
+
+  private final FindUserByIdPort findUserByIdPort;
+  private final FindRepositoriesByUserIdPort findRepositoriesByUserIdPort;
+
+  public FindGitHubUserVirtualThreadRawPreviousErrorUseCase(
+      FindUserByIdPort findUserByIdPort,
+      FindRepositoriesByUserIdPort findRepositoriesByUserIdPort) {
+    this.findUserByIdPort = findUserByIdPort;
+    this.findRepositoriesByUserIdPort = findRepositoriesByUserIdPort;
+  }
+
+  @Override
+  public GitHubUser findGitHubUser(long userId) throws InterruptedException, ExecutionException {
+    LOGGER.info("Finding GitHub user with id '{}'", userId);
+
+    try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+      var user = executor.submit(() -> findUserByIdPort.findByIdThrowingException(userId));
+
+      // it will be executed even if the previous task throws an exception
+      var repositories = executor.submit(() -> findRepositoriesByUserIdPort.findRepositoriesByUser(userId));
+
+      return new GitHubUser(user.get(), repositories.get());
+    }
+  }
+}
